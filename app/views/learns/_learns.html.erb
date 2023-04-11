@@ -15,6 +15,17 @@
             <% if current_user == learn.user %>
               <%= link_to "削除", learn, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
             <% end %>
+             <% if current_user.like?(learn) %>
+                <%= form_with(model: current_user.favorites.find_by(learn_id: learn.id), method: :delete) do |f| %>
+                  <%= hidden_field_tag :learn_id, learn.id %>
+                  <%= f.submit 'いいね解除', class: 'btn btn-info btn-sm' %>
+                <% end %>
+            <% else %>
+                <%= form_with(model: current_user.favorites.build) do |f| %>
+                  <%= hidden_field_tag :learn_id, learn.id %>
+                  <%= f.submit 'いいね', class: 'btn btn-info btn-sm' %>
+                <% end %>
+            <% end %>
           </div>
         </div>
       </li>

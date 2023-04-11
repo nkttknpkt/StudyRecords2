@@ -1,0 +1,24 @@
+<% if learns.any? %>
+  <ul class="list-unstyled mt-2">
+    <% learns.each do |learn| %>
+      <li class="d-flex">
+        <img class="rounded me-2 mb-5" src="<%= gravatar_url(learn.user, { size: 64 }) %>" alt="">
+        <div>
+          <div>
+            <%= link_to learn.user.name, user_path(learn.user), class: "text-decoration-none" %> 
+          </div>
+          <div>
+            <p><%= learn.studydate %></p>
+            <p><%= learn.content %></p>
+          </div>
+          <div>
+            <% if current_user == learn.user %>
+              <%= link_to "削除", learn, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) %>
+<% end %>

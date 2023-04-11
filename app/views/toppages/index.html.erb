@@ -1,10 +1,27 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <div class="row">
+    <aside class="col-sm-4">
+      <%= form_with(model: @learn) do |f| %>
+        <div class="mb-3">
+          <%= f.label :studydate, '日付' %>
+          <%= f.date_select :studydate, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :content, '勉強記録' %>
+          <%= f.text_field :content, class: 'form-control' %>
+        </div>
+        <%= f.submit '作成', class: 'btn btn-primary w-100' %>
+      <% end %>
+    </aside>
+    <div class="col-sm-8">
+      <%= render 'learns/learns', learns: @learns %>
+    </div>
+  </div>
 <% else %>
   <div class="bg-secondary p-3 p-sm-5 my-4 rounded">
     <div class="text-center text-white">
-      <h1>Welcome to the StudyRecords</h1>
-      <%= link_to '新規ユーザーですか?', signup_path, class: 'btn btn-lg btn-primary' %>
+      <h1>StudyRecordsへようこそ!!</h1>
+      <%= link_to '新規ユーザー登録', signup_path, class: 'btn btn-lg btn-primary' %>
     </div>
   </div>
 <% end %>

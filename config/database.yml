@@ -49,7 +49,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: StudyRecords2_production
   username: StudyRecords2
   password: <%= ENV['STUDYRECORDS2_DATABASE_PASSWORD'] %>

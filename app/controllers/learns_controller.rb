@@ -8,7 +8,7 @@ class LearnsController < ApplicationController
     flash[:success] = '勉強記録を作成しました。'
     redirect_to root_url
    else
-    @pagy, @learns = pagy(current_user.learns.order(id: :desc))
+    @pagy, @learns = pagy(current_user.feed_learns.order(id: :desc))
     flash.now[:danger] = '勉強記録の作成に失敗しました。'
     render 'toppages/index'
    end
